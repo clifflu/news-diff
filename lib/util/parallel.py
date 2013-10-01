@@ -103,8 +103,10 @@ class Worker(Thread):
       try:
         payload = fetch(payload, dbi = self.dbi)
       except:
-        print("\n***\nFetch Error")
-        traceback.print_exc()
+        # don't output fetch errors
+        
+        #print("\n***\nFetch Error")
+        #traceback.print_exc()
         self.pool.log_stats('error_fetch')
         self.pool.task_done()
         continue
