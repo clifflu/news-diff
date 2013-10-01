@@ -3,14 +3,14 @@
 
 # CTLR-based Fetches
 ctlr_list = [
-#  'appledaily',
+  'appledaily',
   'chinatimes',
-#  'cna',
-#  'coolloud',
-#  'e_info_org_tw',
-#  'libertytimes',
-#  'newtalk',
-#  'udn',
+  'cna',
+  'coolloud',
+  'e_info_org_tw',
+  'libertytimes',
+  'newtalk',
+  'udn',
 ]
 
 from threading import Condition
