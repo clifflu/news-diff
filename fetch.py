@@ -13,6 +13,9 @@ ctlr_list = [
   'udn',
 ]
 
+from lib.util.parallel import single_or_die
+_SINGLETON = single_or_die()
+
 from threading import Condition
 import lib
 

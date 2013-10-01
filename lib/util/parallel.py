@@ -5,6 +5,24 @@
 from threading import *
 from Queue import Queue as _Queue, Empty
 
+def single_or_die():
+  """
+  保證單一 process 運作
+  Usage: 
+    fp = single_or_die()
+
+  注意：若 fp 被回收，lock 會提前被釋放而失效
+  """
+  import fcntl, sys
+  PID_FN = '/tmp/news-diff.pid'
+  fp = open(PID_FN, 'w')
+  try:
+    fcntl.lockf(fp, fcntl.LOCK_EX | fcntl.LOCK_NB)
+  except IOError:
+    # another instance is running
+    sys.exit(0)
+  return fp
+
 class Queue(_Queue):
   """Job Queue, 包裝底層的 fetcher
 
