@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 #
 
-import urllib
+from urllib2 import urlopen
+
+# HTTP Timeout, in seconds
+HTTP_TIMEOUT = 2
 
 portal_ptrn_list = {
   'feedsportal': "\.feedsportal\.com",
@@ -32,7 +35,7 @@ def _break_portal_feedsportal(payload, uo):
   try:
     html = fromstring(text)
     payload['url_read'] = html.cssselect('a')[0].attrib['href']
-    payload['src'] = urllib.urlopen(payload['url_read'])
+    payload['src'] = urlopen(payload['url_read'], timeout=HTTP_TIMEOUT)
   except:
     payload['url_read'] = uo.url
     payload['src'] = text
@@ -50,7 +53,7 @@ def fetch(payload, dbi = None):
   extra = {'classname': 'util.net.fetch()'}
 
   try:
-    uo = urllib.urlopen(payload['url'])
+    uo = urlopen(payload['url'], timeout=HTTP_TIMEOUT)
     if (uo.code != 200):
       raise IOError("HTTP response code=%d from %s" % (uo.code, uo.url))
 
