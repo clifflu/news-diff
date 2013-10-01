@@ -81,6 +81,10 @@ class Ctlr_Base:
     from lib.util.dt import to_timestamp
     from lib.util.text import to_unicode
 
+    if not payload:
+      pool.log_stats('error_fetch')
+      return
+
     try: payload['pub_ts'] = to_timestamp(payload['meta']['pub_date'])
     except KeyError: pass
 

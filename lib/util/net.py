@@ -82,7 +82,7 @@ def fetch(payload, dbi = None):
 
   if 'error' == payload['category']:
     # raise the exception to skip the parsing process
-    logger.warning("failed fetching %s" % payload['url'], extra=extra)
+    logger.info("failed fetching %s" % payload['url'], extra=extra)
     raise payload['exception']
 
   return payload
